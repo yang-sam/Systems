@@ -10,7 +10,9 @@ typedef struct{
 //create array and reset all array entries
 Node arr[26];
 Node *blank;
-blank = (Node *)malloc(sizeof(Node));
+blank = (Node*)malloc(sizeof(Node));
+blank->w[1] = '0';
+blank->next = NULL;
 
 int count;
 for(count=0; count++; count<26){
