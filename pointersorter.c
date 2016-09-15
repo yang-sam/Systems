@@ -12,6 +12,11 @@
 
 
 //define node structure
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 typedef struct Node{
 	char w[];
 	Node *next;
@@ -21,7 +26,7 @@ typedef struct Node{
 Node arr[26];
 Node *blank;
 blank = (Node*)malloc(sizeof(Node));
-temp->w = ['0'];
+temp->w[1] = '0';
 temp->next = NULL;
 
 int count;
@@ -70,7 +75,7 @@ int main(int argc, char *argv[]){
 				//
 				//
 				//
-				
+
 			}
 			
 
@@ -83,6 +88,12 @@ int main(int argc, char *argv[]){
 	}
 
 
+	//print
+	for(count=0, count < 26, count++){
+		
+
+
+	}
 
 
 
