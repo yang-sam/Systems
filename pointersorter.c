@@ -2,17 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct Node{
+typedef struct{
+	struct Node *next;
 	char *w[];
-	Node *next;
-};
+}Node;
 
 //create array and reset all array entries
 Node arr[26];
 Node *blank;
-blank = (Node*)malloc(sizeof(Node));
-blank->w[1] = '0';
-blank->next = NULL;
+blank = (Node *)malloc(sizeof(Node));
 
 int count;
 for(count=0; count++; count<26){
@@ -67,7 +65,7 @@ int main(int argc, char *argv[]){
 				head = arr[letter];
 				temp = head;
 				//if the head is null or if the newword < current head
-				if(temp.w=='0' || strcmp(temp.w, newword.w>0)){
+				if(temp.w =='0' || strcmp(temp.w, newword.w>0)){
 					arr[letter] = newword;
 					newword.next = temp;
 				}
