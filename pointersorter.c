@@ -2,22 +2,39 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct{
-	struct Node *next;
-	char *w[];
-}Node;
+typedef struct node_{
+	struct node * next;
+	char * w[];
+}node;
 
-//create array and reset all array entries
-Node arr[26];
-Node *blank;
-blank = (Node*)malloc(sizeof(Node));
-blank->w[1] = '0';
-blank->next = NULL;
-
+// // create array and reset all array entries
+node arr[26];
+node * blank;
 int count;
-for(count=0; count++; count<26){
-	arr[count] = blank;
+
+int setup(){
+	blank = malloc(sizeof(node));
+	//perform check to see if space is available
+	if(blank == NULL){
+		return 1;
+	}
+	blank->w[1] = '0';
+	blank->next = NULL;
+	for(count=0; count<26; count++){
+		arr[count] = *blank;
+	}
+
 }
+// // node *blank = NULL;
+// // blank = (node*)malloc(sizeof(node));
+// // // blank->w[1] = '0';
+// // // blank->next = NULL;
+
+// int count;
+// for(count=0; count<26; count++){
+// 	// arr[count] = blank;
+// }
+
 
 
 int main(int argc, char *argv[]){
@@ -27,15 +44,15 @@ int main(int argc, char *argv[]){
 		return 1;
 	}
 
-	char input[] = argv[1];
+	char input[0] = argv[1];
 
 	int end = sizeof(input) / sizeof(input[0]);
 	int front = 0;
 	int back = 0;
 	int letter;
-	Node *head;
-	Node *temp;
-	Node *prev;
+	node *head;
+	node *temp;
+	node *prev;
 
 	while (back<=end){
 		//if the current char is an alphabetical letter, move to the next number
@@ -59,7 +76,7 @@ int main(int argc, char *argv[]){
 					letter = input[front] - 'A' + 1;
 				}
 				//made a node for the word
-				Node newword = (Node*)malloc(sizeof(Node));
+				node *newword = (node*)malloc(sizeof(node));
 				char substring[back-front+1] = 
 				strncpy(substring, input + front, back-front+1);
 				newword.w = substring;
@@ -92,7 +109,7 @@ int main(int argc, char *argv[]){
 
 
 	//printing the words in alphabetical order
-	Node temp;
+	node temp;
 	for(count=0, count < 26, count++){
 		if(arr[count].w != '0'){
 			temp = arr[count];
