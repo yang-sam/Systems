@@ -46,11 +46,10 @@ int main(int argc, char *argv[]){
 		return 1;
 	}
 
-	char input[sizeof(argv[1])];
-	printf("the size of input[] is %d\n", sizeof(input));
+	char input[strlen(argv[1])+1];
 	strcpy(input, argv[1]);
-	printf("input is %s\n", inpgcut[1]);
-
+	// printf("input array - %s\n", input);
+// 	put in for testing purposes ^^
 	int end = sizeof(input) / sizeof(input[0]);
 	int front = 0;
 	int back = 0;
@@ -59,6 +58,10 @@ int main(int argc, char *argv[]){
 	node *temp = (node *)malloc(sizeof(node));
 	node *prev = (node *)malloc(sizeof(node));
 	node *newword = (node*)malloc(sizeof(node));
+
+	node *meh = (node*)malloc(sizeof(node));
+
+	// seg fault good up to here
 
 	while (back<=end){
 		//if the current char is an alphabetical letter, move to the next number
@@ -82,21 +85,29 @@ int main(int argc, char *argv[]){
 					letter = input[front] - 'A' + 1;
 				}
 				//made a node for the word
-				int sub = back-front+1;
+				int sub = back-front;
 				char substring[sub];
-				strncpy(substring, input + front, back-front+1);
-				// newword->w = substring;
+				// strncpy(substring, input + front - 1, back-front-1);
+				strncpy(substring, input + front, back-front);
 				strcpy(newword->w, substring);
 
+				// head = arr[letter];
 				*head = arr[letter];
-				temp = head;
+				temp = head;				
 				//if the head is null or if the newword < current head
-				if(temp->w[1] =='0' || strcmp(temp->w, newword->w>0)){
-					arr[letter] = *newword;
+
+				if(temp->w[1] == 0 || strcmp(temp->w, newword->w)>0){
+					// printf("reached1\n");
 					newword->next = temp;
+					arr[letter] = *newword;
+					// printf("new word added - %s\n", newword->w);
+					*meh = arr[letter];
+					// printf("string at meh is %s\n", meh);
+
 				}
 				else{
 					//find the alphabetical location of the node
+					// printf("reached2\n");
 					prev = temp;
 					temp = temp->next;
 					//while the current node < newword or stop when the end node is found
@@ -136,8 +147,3 @@ int main(int argc, char *argv[]){
 
 
 }
-
-
-
-
-
