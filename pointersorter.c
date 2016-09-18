@@ -55,7 +55,8 @@ int main(int argc, char *argv[]){
 	node *head = (node *)malloc(sizeof(node));
 	node *temp = (node *)malloc(sizeof(node));
 	node *prev = (node *)malloc(sizeof(node));
-	node *newword = (node*)malloc(sizeof(node));
+	node *newword = (node*)malloc(sizeof(
+		));
 
 	while (back<=end){
 		//if the current char is an alphabetical letter, move to the next number
@@ -85,11 +86,11 @@ int main(int argc, char *argv[]){
 				// newword->w = substring;
 				strcpy(newword->w, substring);
 
-				head = arr[letter];
+				*head = arr[letter];
 				temp = head;
 				//if the head is null or if the newword < current head
 				if(temp->w[1] =='0' || strcmp(temp->w, newword->w>0)){
-					arr[letter] = newword;
+					arr[letter] = *newword;
 					newword->next = temp;
 				}
 				else{
@@ -116,7 +117,7 @@ int main(int argc, char *argv[]){
 	node *temp2;
 	for(count=0; count < 26; count++){
 		if(arr[count].w != '0'){
-			temp2 = arr[count];
+			*temp2 = arr[count];
 			while(temp->w != '0'){
 				printf("%s\n", temp->w);
 				temp2 = temp->next;
