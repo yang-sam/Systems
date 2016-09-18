@@ -12,7 +12,7 @@ node arr[26];
 node * blank;
 int count;
 
-int setup(){
+void setup(){
 	blank =(node *)malloc(sizeof(node));
 	//perform check to see if space is available
 	if(blank == NULL){
@@ -39,14 +39,17 @@ int setup(){
 
 int main(int argc, char *argv[]){
 	//check to make sure there is an input
+	setup();
+
 	if(argc!=2){
 		printf("error\n");
 		return 1;
 	}
 
-	char input[10];
-	// printf("The argument taken in is %s\n", argv[1]);
-	// char input[] = argv[1];
+	char input[sizeof(argv[1])];
+	printf("the size of input[] is %d\n", sizeof(input));
+	strcpy(input, argv[1]);
+	printf("input is %s\n", inpgcut[1]);
 
 	int end = sizeof(input) / sizeof(input[0]);
 	int front = 0;
@@ -55,8 +58,7 @@ int main(int argc, char *argv[]){
 	node *head = (node *)malloc(sizeof(node));
 	node *temp = (node *)malloc(sizeof(node));
 	node *prev = (node *)malloc(sizeof(node));
-	node *newword = (node*)malloc(sizeof(
-		));
+	node *newword = (node*)malloc(sizeof(node));
 
 	while (back<=end){
 		//if the current char is an alphabetical letter, move to the next number
