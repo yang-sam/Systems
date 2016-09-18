@@ -13,7 +13,7 @@ node * blank;
 int count;
 
 int setup(){
-	blank = malloc(sizeof(node));
+	blank =(node *)malloc(sizeof(node));
 	//perform check to see if space is available
 	if(blank == NULL){
 		return 1;
@@ -44,15 +44,18 @@ int main(int argc, char *argv[]){
 		return 1;
 	}
 
-	char input[0] = argv[1];
+	char input[10];
+	// printf("The argument taken in is %s\n", argv[1]);
+	// char input[] = argv[1];
 
 	int end = sizeof(input) / sizeof(input[0]);
 	int front = 0;
 	int back = 0;
 	int letter;
-	node *head;
-	node *temp;
-	node *prev;
+	node *head = (node *)malloc(sizeof(node));
+	node *temp = (node *)malloc(sizeof(node));
+	node *prev = (node *)malloc(sizeof(node));
+	node *newword = (node*)malloc(sizeof(node));
 
 	while (back<=end){
 		//if the current char is an alphabetical letter, move to the next number
@@ -76,28 +79,29 @@ int main(int argc, char *argv[]){
 					letter = input[front] - 'A' + 1;
 				}
 				//made a node for the word
-				node *newword = (node*)malloc(sizeof(node));
-				char substring[back-front+1] = 
+				int sub = back-front+1;
+				char substring[sub];
 				strncpy(substring, input + front, back-front+1);
-				newword.w = substring;
+				// newword->w = substring;
+				strcpy(newword->w, substring);
 
 				head = arr[letter];
 				temp = head;
 				//if the head is null or if the newword < current head
-				if(temp.w =='0' || strcmp(temp.w, newword.w>0)){
+				if(temp->w[1] =='0' || strcmp(temp->w, newword->w>0)){
 					arr[letter] = newword;
-					newword.next = temp;
+					newword->next = temp;
 				}
 				else{
 					//find the alphabetical location of the node
 					prev = temp;
-					temp = temp.next
+					temp = temp->next;
 					//while the current node < newword or stop when the end node is found
-					while(strcmp(temp.w, newword.w)<0 || temp.w != '0'){
-						temp. = temp.next;
+					while(strcmp(temp->w, newword->w)<0 || temp->w != '0'){
+						temp = temp->next;
 					}
-					prev.next = newword;
-					newword.next = temp;
+					prev->next = newword;
+					newword->next = temp;
 				}
 
 				back++;
@@ -109,18 +113,24 @@ int main(int argc, char *argv[]){
 
 
 	//printing the words in alphabetical order
-	node temp;
-	for(count=0, count < 26, count++){
+	node *temp2;
+	for(count=0; count < 26; count++){
 		if(arr[count].w != '0'){
-			temp = arr[count];
-			while(temp.w != '0'){
-				printf(%s\n, temp.w);
-				temp = temp.next;
+			temp2 = arr[count];
+			while(temp->w != '0'){
+				printf("%s\n", temp->w);
+				temp2 = temp->next;
 			}
 		}
 	}
-
+	free(blank);
+	free(newword);
+	free(head);
+	free(prev);
+	free(temp);
+	free(temp2);
 	return;
+
 
 }
 
