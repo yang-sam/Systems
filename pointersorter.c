@@ -8,9 +8,10 @@ typedef struct node_{
 }node;
 
 // // create array and reset all array entries
-node arr[26];
-node * blank;
+node *arr[26];
+node *blank;
 int count;
+int bleh = 0;
 
 void setup(){
 	blank =(node *)malloc(sizeof(node));
@@ -18,23 +19,23 @@ void setup(){
 	if(blank == NULL){
 		return 1;
 	}
-	blank->w[1] = '0';
+	blank->w[0] = '0';
 	blank->next = NULL;
 	for(count=0; count<26; count++){
-		arr[count] = *blank;
+		arr[count] = blank;
 	}
 
 }
-// // node *blank = NULL;
-// // blank = (node*)malloc(sizeof(node));
-// // // blank->w[1] = '0';
-// // // blank->next = NULL;
 
-// int count;
-// for(count=0; count<26; count++){
-// 	// arr[count] = blank;
+// void freeArr(node *destroy){
+// 	while(destroy->next != NULL){
+// 		printf("count value %d\n", bleh);
+// 		freeArr(destroy->next);
+// 	}
+// 	bleh++;
+// 	free(destroy);
+// 	return;
 // }
-
 
 
 int main(int argc, char *argv[]){
@@ -54,12 +55,16 @@ int main(int argc, char *argv[]){
 	int front = 0;
 	int back = 0;
 	int letter;
-	node *head = (node *)malloc(sizeof(node));
-	node *temp = (node *)malloc(sizeof(node));
-	node *prev = (node *)malloc(sizeof(node));
-	node *newword = (node*)malloc(sizeof(node));
+	node *head;
+	node *temp;
+	node *prev;
+	// node *head = (node *)malloc(sizeof(node));
+	// node *temp = (node *)malloc(sizeof(node));
+	// node *prev = (node *)malloc(sizeof(node));
+	node *newword;
 
-	node *meh = (node*)malloc(sizeof(node));
+	int sub;
+	char substring[100];
 
 	// seg fault good up to here
 
@@ -85,33 +90,33 @@ int main(int argc, char *argv[]){
 					letter = input[front] - 'A' + 1;
 				}
 				//made a node for the word
-				int sub = back-front;
-				char substring[sub];
-				// strncpy(substring, input + front - 1, back-front-1);
-				strncpy(substring, input + front, back-front);
-				strcpy(newword->w, substring);
-
-				// head = arr[letter];
-				*head = arr[letter];
+				sub = back-front;
+				// char substring[sub];
+				newword = (node*)malloc(sizeof(node));
+				strncpy(newword->w, input + front, back-front);
+				// strcpy(newword->w, substring);
+				strcpy(substring, "");
+				head = arr[letter];
 				temp = head;				
 				//if the head is null or if the newword < current head
 
-				if(temp->w[1] == 0 || strcmp(temp->w, newword->w)>0){
-					// printf("reached1\n");
+				//new word
+				if(strcmp(temp->w, "0") == 0){
 					newword->next = temp;
-					arr[letter] = *newword;
-					// printf("new word added - %s\n", newword->w);
-					*meh = arr[letter];
-					// printf("string at meh is %s\n", meh);
+					arr[letter] = newword;
 
 				}
+				//earlier alphabetically
+				else if(strcmp(temp->w, newword->w)>0){
+					newword->next = temp;
+					arr[letter] = newword;					
+				}
+				//later alphabetically
 				else{
 					//find the alphabetical location of the node
-					// printf("reached2\n");
-					prev = temp;
-					temp = temp->next;
-					//while the current node < newword or stop when the end node is found
-					while(strcmp(temp->w, newword->w)<0 || temp->w != '0'){
+
+					while(strcmp(temp->w, newword->w)>0 || temp->next != NULL){
+						prev = temp;
 						temp = temp->next;
 					}
 					prev->next = newword;
@@ -125,25 +130,25 @@ int main(int argc, char *argv[]){
 		}
 	}
 
-
 	//printing the words in alphabetical order
-	node *temp2;
 	for(count=0; count < 26; count++){
-		if(arr[count].w != '0'){
-			*temp2 = arr[count];
-			while(temp->w != '0'){
-				printf("%s\n", temp->w);
-				temp2 = temp->next;
-			}
+		temp = arr[count];	
+		while(strcmp(temp->w, "0") != 0 ){
+			printf("%s\n", temp->w);
+			prev = temp;
+			temp = temp->next;
+			free(prev);
 		}
 	}
-	free(blank);
-	free(newword);
-	free(head);
-	free(prev);
-	free(temp);
-	free(temp2);
+
+	// for(count=0; count <26; count++){
+	// 	temp = arr[count];
+	// // 	freeArr(temp);
+	// // }
+	// free(arr);
 	return;
 
-
 }
+
+//space issue
+//capitalization issue
