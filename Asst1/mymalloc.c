@@ -76,6 +76,7 @@ void * mymalloc(size_t size, char * f, int l){
 	// printf("for kicks and giggles %d\n", spacestart);
 	// printf("myblock check 300 - %c, and of 200 - %c\n", myblock[300], myblock[299]);
 	// printf("congrats scrub\n");
+	
 	return toReturn;
 
 }
@@ -110,7 +111,17 @@ void myfree(void *toFree, char * f, int l){
 	// for(i = 0; i < 3; i++){
 	// 	printf("value at index %s\n", myblock[i]);
 	// }
+	
  	return;
 
 }
 
+void memcheck(){
+	int i;
+	printf("memcheck\n");
+	for(i = 0; i<20; i++){
+		printf(" %c ", myblock[i]);
+	}
+	printf("\n\n");
+	return;
+}
