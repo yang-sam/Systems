@@ -1,0 +1,27 @@
+Christie Chang		<cc1173@scarletmail.rutgers.edu>
+Samuel Yang			<sy369@scarletmail.rutgers.edu>
+
+TEST E:
+This test case takes an initial pointer and allocates the space in memory for it, with a size of a pointer.  This
+is then repeated until all available slots in memory have been occupied and there is no longer anything available to be used.
+From there, the free function is called to release the memory to be used, not through pointers, but through incrementing the 
+address of the memory by the number of bytes corresponding to the size of a poitner.  
+
+This test case is checking to see if the memory can still be properly freed if the reference to memory is not
+directly tied to a pointer.  The initial pointer's address is returned to be freed.  And then it is incremented by the
+size of a pointer in order to retrieve the next memory address where space has been allocated for use.  Using that address,
+the memory is freed, with the intent of making it recoverable and reusable once more for all malloc operations.  Ultimately,
+this test indicates whether or not memory can be accessed by the actual address that is assigned to it and not just the pointers
+that are created by memgrind.
+
+
+TEST F:
+This test case initially mallocs 4 separate instances, that take up the majority of the memory provided.  From there,
+instance 2 and instance 3 are freed, resulting in an available space of memory that is the size of the sum of instances 2 and
+3.  A new instance of malloc is called that is greater than the one called in instance 2, but is still smaller than the sum of 
+both instances 2 and 3.  Finally all pointers are freed so that all memory is available to be used.  
+
+The purpose of this test case is to check that space being freed in the middle of the memory block is correctly being read
+as available space for new instances of malloc.  By creating two separate instances of malloc, and then calling malloc after
+the previous cases have been freed on a block size that surpasses the size of either one, we test to see if the program
+accurately reads that entire continuous block as available size for memory to be given for the data asked.  
