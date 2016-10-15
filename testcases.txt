@@ -1,4 +1,0 @@
-In order to run code, enter into command line:
-gcc - 
-
-Testcase 1:
