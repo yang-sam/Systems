@@ -15,6 +15,29 @@ static bool init = false;
 static void* point[5000];
 static int psize[5000];
 
+
+bool checkspace(int size){
+	int count;
+	int openspace = 0;
+	for(count = 0; openspace < size; count++){
+		if(myblock[count] == '0'){
+			openspace++;
+		}
+		else{
+			openspace = 0;
+		}
+		if(openspace == size){
+			//space found
+			return true;
+		}
+		if(count == 4999){
+			break;
+		}
+	}
+	//space not found
+	return false;
+}
+
 void * mymalloc(size_t size, char * f, int l){
 	int count = 0;
 	//initializing the myblock array, will only occur once
@@ -85,6 +108,10 @@ void myfree(void *toFree, char * f, int l){
 
 	//find the index of the pointer
 	int index, count;
+	if(toFree==0){
+		fprintf(stderr, "Already freed or not a pointer "grn"%s: "red"%d\n"reset, f, l);
+	}
+
 	for(index=0; index<5000; index++){
 		if(point[index] == toFree){
 			// printf("address found\n");
@@ -114,6 +141,13 @@ void myfree(void *toFree, char * f, int l){
 	
  	return;
 
+}
+
+void startover(){
+	int count;
+	for(count=0; count<5000; count++){
+		myblock[count]='0';
+	}
 }
 
 void memcheck(){
