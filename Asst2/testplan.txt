@@ -1,1 +1,52 @@
-//your testing parameters to bug check your code and be sure it handles all likely errors well
+Errors checked based on input files:
+No file exists --> exit program
+No read access --> exit program
+Compression already exists --> warning message then overwrite file
+
+
+//empty string in file
+"", 1
+Error, empty file
+
+//only symbols in file
+"2543776%$^&^&*&*(*()*()", 1
+""
+
+//single letter
+"a", 1
+"a"
+
+//wrong input number of parts
+"a", 2
+Error --> number of parts is greater than number of characters
+
+//2 consecutive letters
+"baa", 1
+"baa"
+
+//capital letters and lowercase letters handles separately
+"Aaaaa", 1
+"A4a"
+
+//start and end with symbol
+"&÷;#*#ggsgwwwww*#: $>#brkdnsg@*@,g^g%g%c.  644"
+""
+also prints out errors for incompressible characters
+
+//a lot of characters
+"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh", 1
+"96h"
+
+//same as above, but with symbols
+"hhhhh83735hhhhh@@hhhhhhhhhhhhhhhhhhhhhh@#%^hhhhhhh=&×,@(hhhh963hhhhhhh: $#hhhhhhhhhh&hhhhhhh&%hhhhhhhhhh. hhhhhhhhh%^##hhhhhhhhhh", 1
+"96h"
+
+//splitting into multiple parts (no remainder)
+"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh", 8
+"12h" "12h" "12h" "12h" "12h" "12h" "12h" "12h"
+
+//splitting into multiple parts (no remainder)
+"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh", 10
+"15h" "9h" "9h" "9h" "9h" "9h" "9h" "9h" "9h" "9h"
+
+

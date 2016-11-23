@@ -1,1 +1,62 @@
 //a description of how you tested procs vs threads, the values you logged, how many times you ran your tests, and what your conclusions are
+
+The following testcase was used for all testing purposes. This was used because this tests for repetitions and for splitting the string into numbers of parts.
+"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh", 10
+
+The contents of the main method was put into a for loop to run for either 5 or 500 times each for processes and threads. The average time per process was recorded for 10 or 5 repetitions respectively. The overall average time was calculated at the end of the dataset.
+
+
+compressT_LOLS 5 loops
+0.007026 seconds/process
+0.007028 seconds/process
+0.011071 seconds/process
+0.006452 seconds/process
+0.011148 seconds/process
+0.005552 seconds/process
+0.002386 seconds/process
+0.003430 seconds/process
+0.011850 seconds/process
+0.009625 seconds/process
+
+Avg time: 0.0075568 seconds/process
+
+
+compressR_LOLS 5 loops
+0.044618 seconds/process
+0.041163 seconds/process
+0.042195 seconds/process
+0.045684 seconds/process
+0.039121 seconds/process
+0.044391 seconds/process
+0.041608 seconds/process
+0.039569 seconds/process
+0.040707 seconds/process
+0.037962 seconds/process
+
+Avg time: 0.0417018 seconds/process
+
+
+compressT_LOLS 500 loops
+errors. could not process
+
+Avg time:
+
+
+compressR_LOLS 500 loops
+0.056881 seconds/process
+0.062601 seconds/process
+0.066178 seconds/process
+0.062857 seconds/process
+0.059604 seconds/process
+
+Avg time: 0.0616242 seconds/process
+
+
+
+Threads are faster than processes in when comparing the 5 loop repetitions as indicated by the overall time. When using the 500 loop repetitions, the processes were more reliable because the threads weren't able to complete. The threads probably processed too fast, which is what caused some conflicts, making it very difficult for the loop to complete without aborting.
+
+
+
+
+
+
